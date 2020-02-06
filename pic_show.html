@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>图片展示区~</title>
+  <meta name="Keywords" content="jq照片墙" />
+  <meta name="Description" content="" />
+  <meta name="Author" content="" />
+  <style type="text/css">
+	*{margin:0;padding:0;}
+     body{cursor:pointer;/*变成小手指*/}
+    .Img{width:900px; height:560px; margin:150px auto; box-shadow:0px 0px 20px #000;}
+	.Img img{float:left;}
+	/*css str*/
+	.str{width:100%; height:100%; background:rgba(0,0,0,0.5); position:fixed; left:0px; top:0px; display:none;/*隐藏*/}
+	/*css show*/
+	.show{width:649px; height:404px; background:#ff9900; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);border:10px solid #fff; display:none; /*隐藏*/}
+	.show .left{position:absolute;top:180px; left:-70px;}
+	.show .right{position:absolute;top:180px; right:-70px;}
+  </style>
+ </head>
+	 <body>
+		<!--Img start-->
+		<div class="Img">
+		<img src="img/bg1.jpg" width='300' height='187' />
+		<img src="img/bg2.jpg" width='300' height='187' />
+		<img src="img/bg3.jpg" width='300' height='187' />
+		<img src="img/bg4.jpg" width='300' height='187' />
+		<img src="img/bg5.jpg" width='300' height='187' />
+		<img src="img/bg6.jpg" width='300' height='187' />
+		<img src="img/bg7.jpg" width='300' height='187' />
+		<img src="img/bg8.jpg" width='300' height='187' />
+		<img src="img/bg9.jpg" width='300' height='187' />
+	</div>
+<!--Img end-->
+<!--str start-->
+<div class="str"></div>
+		<!--show start-->
+		<div class="show">
+         <img src="img/dirl.png" class="left" />
+		 <img src="img/dirr.png" class="right" />
+		 <img src="" class="but" />
+		</div>
+		<!--show end-->
+
+<!--str end-->
+
+<!--引用jquery官方类库文件-->
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    var index=0;
+ //显示遮罩层   大图展示区域  
+  $(".Img img").click(function(){
+   $(".str,.show").show();   //显示
+   //获取自身的图片地址
+   var bimg= $(this).attr('src');
+ //获取过来的图片地址改变给大图显示框的img图片地址
+   $(".show img.but").attr('src',bimg);
+     index=$(this).index();
+
+  });
+//关闭遮罩层
+$(".str").click(function(){
+ $(".str,.show").hide();   //隐藏
+});
+
+//点击右键切换下一张
+$(".show .right").click(function(){
+  index++;   //序列号+1
+  if(index>8){index=0}
+  var bimg=$(".Img img").eq(index).attr('src');//大图地址不断随着序列号变换
+   $(".show img.but").attr('src',bimg);
+});
+//左键
+$(".show .left").click(function(){
+  index--;   //序列号-1
+  if(index<0){index=8}
+  var bimg=$(".Img img").eq(index).attr('src');//大图地址不断随着序列号变换
+   $(".show img.but").attr('src',bimg);
+});
+</script>
+	 </body>
+</html>

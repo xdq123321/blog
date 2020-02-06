@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+ <head>
+  <!--声明当前页面的编码集:charset=gbk,gb2312(中文编码),utf-8国际编码-->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- 当前页面的三要素 -->
+  <title>Q弹计算器</title>
+  <meta name="Keywords" content="Q弹计算器" />
+  <meta name="Description" content="" />
+  <meta name="Author" content="" />
+  <!--css,js-->
+  <style type="text/css">
+	*{margin:0;padding:0;}
+   body{background:url("images/2.jpg");/*色  图*/}
+   #jsq{width:540px; height:500px; background:rgba(255,255,255,0.5); margin:80px auto; box-shadow:0px 0px 10px #000; border-radius:5px;}
+   #jsq p{ font:18px/50px 微软雅黑;  text-indent:20px;/*首行缩进*/}
+  #jsq #result{width:500px; background:#ffcc33; margin:0px auto; font:40px/50px 微软雅黑; text-align:right; border-radius:10px;}
+#box{width: 100%;text-align: center;}
+  /*css but*/
+	#jsq .but{width:500px; height:320px;  margin:30px auto 0px; cursor:pointer;}
+	#jsq .but ul li{width:80px; height:60px;  list-style-type:none; float:left;margin:9px; background:#ccccff; box-shadow: 0px 0px 5px #fff; color:#fff; font-size:22px; text-align:center; line-height:60px; border-radius:5px;}
+	#jsq .but ul li:hover{background:#cc99ff;}
+
+    #jsq .but ul li.tool{background:#ef616e;}
+	#jsq .but ul li.tool:hover{background:#ff0000;}
+	#jsq .but ul li.tools{background:#ff9966;}
+	#jsq .but ul li.tools:hover{background:#ff9900;}
+	#jsq p.text{text-indent:30px;  font-size:12px; line-height:30px;}
+
+  </style>
+ </head>
+	 <body>
+		<div id="jsq">
+		  <p>萧董好哇塞</p>
+		  <div id="box"><input type="text" class="s_text" onfocus="this.blur();" value="0" id="result"/></div>
+		   <!--数字按键开始-->
+		   <div class="but"> 
+	        <ul>      
+			 <li  onclick="command(7)">7</li> 
+			 <li onclick="command(8)">8</li>
+			 <li onclick="command(9)">9</li>
+			 <li class="tool" onclick="del('j');">←</li>   
+			 <li class="tool" onclick="clearzero('j');">C</li> 
+			 <li onclick="command(4)">4</li>
+			 <li onclick="command(5)">5</li>
+			 <li onclick="command(6)">6</li>
+			 <li class="tool" onclick="tools('*','g')">×</li> 
+			 <li class="tool"  onclick="tools('/','g')">÷</li>
+			 <li onclick="command(3)">3</li>
+			 <li onclick="command(2)">2</li>
+			 <li onclick="command(1)">1</li>
+			 <li class="tool"  onclick="tools('+','g')">+</li>
+			 <li class="tool"  onclick="tools('-','g')">-</li>
+			 <li onclick="command(0)">0</li>
+			 <li onclick="command(00)">00</li>
+			 <li onclick="dot('g');">.</li>
+			  <li class="tool"  onclick="tools('%','g')">%</li>
+			 <li class="tools" onclick="equal('j')">=</li>
+			
+			</ul>
+	   </div>
+	   <!--数字按键结束-->
+
+	   <!--版权信息-->
+	   <p class="text">欢迎使用Q弹计算器！</p>
+	 </div>
+</div>
+<!--<audio src="wav/0.wav" id="music" ></audio>-->
+<div id="audioBox"></div>
+<!--引用jquery官方类库文件-->
+<!--<script src="js/jquery-1.2.6.min.js"></script>-->
+<script type="text/javascript">
+	
+	// 获取id = "result" 文本框对象
+	var resultDom = document.getElementById("result");
+	// 操作符锁
+	var operate = true;
+	// 锁
+	var xop = true;
+
+	// 点击计算器键盘执行的操作
+	function command(num){
+		var str = resultDom.value;
+		// 如果是0 , 就用""填充
+		str = (str == "0" ? "":str);
+		// 拼接点击数字
+		str += num;
+		// 赋值给文本框
+		resultDom.value = str;
+		
+		operate = true;
+
+		// 点击键盘时候的声音
+		paly(num);
+	}
+
+	// 播放声音
+	function paly(num){
+		var playDom = document.getElementById("audioBox");
+		playDom.innerHTML = "<embed src='wav/"+num+".wav' width='0' height='0'></embed>";
+	}
+
+	// 操作符
+	function tools(p,m){
+		if(operate){
+			var num = resultDom.value;
+			num = (num == "0" ? "":num);
+			// 拼接操作符
+			resultDom.value = num + p;
+			operate = false;
+			xop = true;
+		}
+		// 点击键盘时候的声音
+		paly(m);
+	}
+
+	// 计算等于
+	function equal(m){
+		paly(m);
+		var result = resultDom.value;
+		var r = eval(result);
+		resultDom.value = r;
+	}
+	
+	// 清空
+	function clearzero(m){
+		resultDom.value = 0;
+		paly(m);
+		xop = true;
+		operate = true;
+	}
+
+	// 点击小数点
+	function dot(m){
+		if(xop){
+			var num = resultDom.value;
+			num = num + "."; // num += ".";
+			resultDom.value = num;
+			xop = false;
+		}
+		// 播放按键声音
+		paly(m);
+	}
+
+	// 退格键
+	function del(m){
+		// 获取文本框的内容
+		var str = resultDom.value;
+		// 截取最后一个数字
+		str = str.substring(0,str.length - 1);
+		str = (str == "" ? 0 : str);
+		
+		// 重新赋值
+		resultDom.value = str;
+		// 
+		paly(m);
+
+	}
+
+
+</script>
+
+	 </body>
+</html>

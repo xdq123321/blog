@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>h5拖拽上传图片</title>
+	<style>
+        * {
+        	margin: 0;
+            text-align: center;
+        }
+ 
+        #container {
+        	width: 80%;
+            min-height: 200px;
+            border: 1px solid #666;
+            margin: 1rem auto;
+            padding: 1rem;
+        }
+    </style>
+</head>  
+<body>
+    <h2>将本地图片拖拽上传至下方区域</h2>
+    <div id="container"></div>
+    <script>
+    	var box = document.querySelector('#container');
+        //阻止浏览器的默认事件
+        function Myfunc(e){
+        	var e = e || event;
+        	e.preventDefault();
+        }
+		 document.addEventListener('drop',Myfunc);
+		 document.addEventListener('dragover',Myfunc);
+        
+ 		 box.addEventListener('dragover',Myfunc);
+         box.ondrop = function (e) {
+            // 读取拖放进来的客户端图片内容
+//		 var list=e.dataTransfer.files;
+//		 for(var i=0;i<list.length;i++){
+//			console.log(list[i]);
+//		 }
+ 
+            // 找到文件
+            var f = e.dataTransfer.files[0];
+            // 创建文件读取器
+            var reader = new FileReader();
+            // 读取文件中的内容
+            reader.readAsDataURL(f);
+            reader.onload = function () {
+                console.log("客户端读取数据成功！");
+                //格式为数据编码
+                console.log(reader.result);
+                var img = new Image();
+                img.src = reader.result;
+                box.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>

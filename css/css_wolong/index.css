@@ -1,0 +1,75 @@
+.flex{display: flex;flex-flow: row nowrap;justify-content: space-around;align-content:center;}
+.flex1{display: flex;flex-flow: row nowrap;justify-content:space-between;align-content:center;}
+.flexend{display: flex;flex-flow: row nowrap;justify-content:flex-end;align-content:center;}
+.flexcol{display: flex;flex-flow: column nowrap;justify-content:space-between;align-content:center;}
+.header{padding: .8rem 0;}
+.header_logo{max-width: 200px;}
+.nav{background: #C1C1C1;}
+.nav>ul {/*overflow: hidden;*/white-space: nowrap;}
+.nav>ul li{display:inline-block;padding:.8rem;text-align: center;color: #fff;}
+#banner ul li{flex-shrink: 0;}
+h2{font-size: 1.1rem;}
+.mar_top{margin-top: 1.2rem;}
+.box-padding{padding: 0 .8rem;}
+.news_main li{    height: 2rem;
+    background: url(../images/dot.jpg) no-repeat 2px center;
+    padding-left: 1rem;}
+.news_main a{height: 2rem;
+    font-size: .9rem;
+    float: left;
+    color:#666;
+    line-height: 2rem;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.news_main span{    font-size: .7rem;
+    color: #575757;
+    float: right;
+    height: 2rem;
+    line-height: 2rem;}
+.p_hidden{
+	font-size: .9rem;
+    line-height: 2rem;
+    overflow: hidden;
+max-height:6rem;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;}
+.top_height{
+	height: 2.1rem;
+}
+.more{
+	padding: 0 .3rem;
+    height: 2rem;
+    background: #b0b0b0;
+    border-radius: 5px;
+    font-size: .6rem;
+    line-height: 2rem;
+    text-align: center;
+}
+.text-center{text-align: center;}
+.flexcol li{margin-top: 1rem;}
+.mar_left{margin-left: 1.1rem;max-width: 60%;}
+.footer{background: #e5e5e5;}
+.footer_top div.flex2{
+	    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+        border-bottom: 1px solid #c1c1c1;
+    line-height: 2;
+}
+.footer_top div a{color: #666;margin-right: 1.2rem;}
+.footer_bottom_top p{font-size: .7rem;margin-bottom: 1rem;}
+.footer_bottom_top p a,.footer_bottom_bottom  a{display: inline-block;color:#666;}
+.footer_bottom_bottom  a{margin-right: .4rem;}
+.footer_bottom_bottom  a img{vertical-align: bottom;}

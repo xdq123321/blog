@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>打字机特效</title>
+</head>
+<body>
+  <p></p>
+  <script>
+    var oP = document.getElementsByTagName('p')[0];
+    var str = '儿时凿壁偷了谁家的光,宿昔不梳 忆苦十年寒窗,如今灯下闲读 红袖添香,半生浮名只是虚妄,三月 一路烟霞 莺飞草长';
+    var i = 0;
+    var timer = setInterval(function() {
+      var txt = str.substring(0, ++i);
+      oP.innerText = txt + '_';
+      if (i == str.length) {
+        clearInterval(timer);
+        oP.innerText = txt + '';
+      }
+    }, 200);
+  </script>
+</body>
+
+</html>
+
+
